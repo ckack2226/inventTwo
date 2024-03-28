@@ -1,27 +1,29 @@
-import connection from "@/app/libs/sql";
+import connection, { findOne } from "@/app/libs/sql";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { messages } from "@/app/utils/message";
+import { User } from "@/app/models/User";
 
 export async function POST(request: NextRequest) {
    try {
     await connection;
 
-    const body: IUser = await request.json();
-    const {user,password} = body;
+    const body: User = await request.json();
+    const {NombreUsuario,password} = body;
 
-    if(!user || password){
+    if(!NombreUsuario || password){
         return NextResponse.json(
             {message : messages.error.needProps},
             {status:400}
         );
     }
 
-    const userFind = await User.findOne({email});
+    const userFind = await findOne('SELECT * FROM usuarios WHERE NombreUsuario = ?', [NombreUsuario]);
 
     if(!userFind){
         return NextResponse.json(
-            {message:message.error.userNotFound},
+            {message: messages.error.userNotFound},
             {status:400}
         );
     }
@@ -32,7 +34,7 @@ export async function POST(request: NextRequest) {
 
     if(!isCorrect){
        return NextResponse.json(
-        {message:message.error.incorrectPassword},
+        {message:messages.error.incorrectPassword},
         {status:400}
        );
     }
@@ -58,7 +60,7 @@ export async function POST(request: NextRequest) {
 
    } catch (err){
      return NextResponse.json(
-        {message:message.error.default,error},
+        {message:messages.error.default, err},
         {status:500}
      );
    }
