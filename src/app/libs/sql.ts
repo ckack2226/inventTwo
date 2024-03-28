@@ -1,6 +1,7 @@
 import mysql from 'mysql';
 import { ConnectionConfig } from 'mysql';
 import dotenv from 'dotenv';
+import { User, UserModel } from '../models/User';
 
 dotenv.config();
 
@@ -23,3 +24,17 @@ connection.connect((err) => {
 });
 
 export default connection;
+
+
+export const findOne = <T>(query: string, data: any[]): Promise<T | null> => {
+  return new Promise((resolve, reject) => {
+    connection.query(query, data, (err, results, fields) => {
+      if (err) return reject(err);
+
+      if (results.length) {
+        resolve(new UserModel( results[0].NombreUsuario, results[0].Password) as T);
+      }
+      resolve(null);
+    });
+  });
+}
