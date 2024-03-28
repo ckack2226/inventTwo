@@ -26,14 +26,25 @@ connection.connect((err) => {
 export default connection;
 
 
-export const findOne = <T>(query: string, data: any[]): Promise<T | null> => {
+interface UserWithoutUsuarioID extends Omit<User, "UsuarioID"> {
+  UsuarioID?: number;
+}
+
+export const findOne = <T extends UserWithoutUsuarioID>(query: string, data: any[]): Promise<T | null> => {
   return new Promise((resolve, reject) => {
     connection.query(query, data, (err, results, fields) => {
       if (err) return reject(err);
 
       if (results.length) {
-        resolve(new UserModel( results[0].NombreUsuario, results[0].Password) as T);
+        const user = {
+          NombreUsuario: results[0].NombreUsuario,
+          Password: results[0].Password,
+          ...results[0]
+        };
+
+        resolve(user as T);
       }
+
       resolve(null);
     });
   });

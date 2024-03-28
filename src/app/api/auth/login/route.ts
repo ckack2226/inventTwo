@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { messages } from "@/app/utils/message";
 import { User } from "@/app/models/User";
+import 'dotenv/config'
 
 export async function POST(request: NextRequest) {
    try {
@@ -12,7 +13,7 @@ export async function POST(request: NextRequest) {
     const body: User = await request.json();
     const {NombreUsuario,password} = body;
 
-    if(!NombreUsuario || password){
+    if(!NombreUsuario || !password){
         return NextResponse.json(
             {message : messages.error.needProps},
             {status:400}
@@ -27,6 +28,8 @@ export async function POST(request: NextRequest) {
             {status:400}
         );
     }
+
+
     const isCorrect: boolean = await bcrypt.compare(
         password,
         userFind.password
@@ -39,11 +42,11 @@ export async function POST(request: NextRequest) {
        );
     }
     
-    const {password: userPass, ...rest}=userFind._doc;
+    const {password: userPass, ...rest}= userFind;
 
-    const token = jwt.sign({data: rest}, "secreto",{
-        expiresIn: 86400,
-    });
+    const JWT_SECRET = process.env.JWT_SECRET;
+
+    const token = jwt.sign({ data: rest }, JWT_SECRET ?? '', { expiresIn: 86400 });
 
     const response = NextResponse.json(
         {userLogged: rest, message: messages.success.userLogged},
