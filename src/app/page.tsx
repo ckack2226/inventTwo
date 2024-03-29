@@ -18,6 +18,8 @@ export default function LoginPage () {
     finishLoading()
   }
 
+console.log(FormData);
+
   return (
     <>
       <Form
@@ -27,8 +29,8 @@ export default function LoginPage () {
       >
         <div className='my-[10px] flex flex-col gap-4'>
           <Form.Input
-            label='Correo'
-            name='email'
+            label='Usuario'
+            name='NombreUsuario'
             placeholder='Ingresa tu correo...'
           />
           <Form.Input
