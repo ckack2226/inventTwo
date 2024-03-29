@@ -1,4 +1,4 @@
-//import NotificationContext from '@/context/NotificationContext'
+import NotificationContext from '@/app/context/NotificationContext'
 import axios, { AxiosRequestConfig } from 'axios'
 import { useRouter } from 'next/navigation'
 import { useContext } from 'react'
@@ -11,7 +11,7 @@ interface AuthFetchProps {
 }
 
 export function useAuthFetch () {
-  //const { showNotification } = useContext(NotificationContext)
+  const { showNotification } = useContext(NotificationContext)
   const router = useRouter()
 
   const authRouter = async ({
@@ -27,19 +27,19 @@ export function useAuthFetch () {
         options
       )
 
-    //   showNotification({
-    //     msj: data.message,
-    //     open: true,
-    //     status: 'success'
-    //   })
+      showNotification({
+        msj: data.message,
+        open: true,
+        status: 'success'
+      })
 
       if (redirectRoute) router.push(redirectRoute)
     } catch (error: any) {
-    //   showNotification({
-    //     msj: error.response.data.message as string,
-    //     open: true,
-    //     status: 'error'
-    //   })
+      showNotification({
+        msj: error.response.data.message as string,
+        open: true,
+        status: 'error'
+      })
     }
   }
 
