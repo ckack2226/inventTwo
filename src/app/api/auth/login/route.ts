@@ -1,10 +1,12 @@
-import connection, { findOne } from "@/app/libs/sql";
+import connection from "@/app/libs/sql";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { messages } from "@/app/utils/message";
 import { User } from "@/app/models/User";
 import 'dotenv/config'
+import { findOne } from "@/app/libs/findUsers";
+
 
 export async function POST(request: NextRequest) {
    try {

@@ -1,10 +1,11 @@
-import connection, { findOne } from "@/app/libs/sql";
+import connection from "@/app/libs/sql";
 import { messages } from "@/app/utils/message";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs"
 import { User, UserModel } from "@/app/models/User";
 import jwt from "jsonwebtoken"
 import 'dotenv/config'
+import { findOne } from "@/app/libs/findUsers";
 
 
 export async function POST(request: NextRequest) {
@@ -30,7 +31,7 @@ export async function POST(request: NextRequest) {
       },{ status: 400, }
       );
    }   
-   
+
    const userFind = await findOne('SELECT * FROM usuarios WHERE NombreUsuario = ?', [NombreUsuario]);
 
    if (userFind) {
