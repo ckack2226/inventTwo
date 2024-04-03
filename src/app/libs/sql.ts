@@ -2,6 +2,7 @@ import mysql from 'mysql';
 import { ConnectionConfig } from 'mysql';
 import dotenv from 'dotenv';
 
+
 dotenv.config();
 
 const config: ConnectionConfig = {

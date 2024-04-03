@@ -1,12 +1,43 @@
 import Header from "../components/header"
+import SeccionProducto from "../components/seccionProducto/seccionProducto"
+
 
 export default function HomePage() {
+  const lista=[
+    {
+      ProductoID:1,
+Nombre:"perro",
+Descripcion:"En Los computadores PORTATILES La duración de la batería es un valor aproximado y depende del uso que se le de al equipo. (Los computadores De escritorio NO tienen batería) ",
+Precio:"206",
+UnidadMedida:"tablet",
+ProveedorID:5,
+LicenciaCertificacionID:8
+    },
+    {
+      ProductoID:1,
+Nombre:"perro",
+Descripcion:"En Los computadores PORTATILES La duración de la batería es un valor aproximado y depende del uso que se le de al equipo. (Los computadores De escritorio NO tienen batería) ",
+Precio:"206",
+UnidadMedida:"tablet",
+ProveedorID:5,
+LicenciaCertificacionID:8
+    },
+    {
+      ProductoID:1,
+Nombre:"perro",
+Descripcion:"En Los computadores PORTATILES La duración de la batería es un valor aproximado y depende del uso que se le de al equipo. (Los computadores De escritorio NO tienen batería) ",
+Precio:"206",
+UnidadMedida:"tablet",
+ProveedorID:5,
+LicenciaCertificacionID:8
+    }
+  ]
     return (
       <>
       <Header />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1>Home</h1>
-      </main>
+
+        <SeccionProducto lista={lista}/>
+          
       </>
     )
   }
