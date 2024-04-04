@@ -7,7 +7,7 @@ interface ICard {
     Precio:string,
     UnidadMedida:string,
     ProveedorID:number,
-    LicenciaCertificacionID:number
+    LicenciaCertificacionID?:number;
 }
 
 export default function Card(props: ICard){
