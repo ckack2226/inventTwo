@@ -1,3 +1,4 @@
+import CardProducts from "../components/CardProducts"
 import Header from "../components/header"
 
 export default function HomePage() {
@@ -5,7 +6,7 @@ export default function HomePage() {
       <>
       <Header />
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1>Home</h1>
+        <CardProducts />
       </main>
       </>
     )
