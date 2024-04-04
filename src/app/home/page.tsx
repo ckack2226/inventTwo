@@ -1,43 +1,43 @@
-'use client'
-
 import Header from "../components/header"
 import SeccionProducto from "../components/seccionProducto/seccionProducto"
-import React, { useState, useEffect } from 'react';
-import { Producto } from "../models/Product";
+
 
 export default function HomePage() {
-
-  const [productos, setProductos] = useState<Producto[]>([]);
-
-  // useEffect(() => {
-  //   const cargarProductos = async () => {
-  //     const respuesta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/producto`);
-  //     if (!respuesta.ok) throw new Error('Respuesta de la API no fue exitosa');;
-  //     const productosDesdeAPI = await respuesta.json();
-  //     setProductos(productosDesdeAPI);
-  //   };
-  
-  //   cargarProductos();
-  // }, []);
-  useEffect(() => {
-    const cargarProductos = async () => {
-      try {
-        const respuesta = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/producto`);
-        if (!respuesta.ok) throw new Error('Respuesta de la API no fue exitosa');
-        const productosDesdeAPI = await respuesta.json();
-        setProductos(productosDesdeAPI.productos);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-  
-    cargarProductos();
-  }, []);
-  
-  return (
-    <>
+  const lista=[
+    {
+      ProductoID:1,
+Nombre:"perro",
+Descripcion:"En Los computadores PORTATILES La duración de la batería es un valor aproximado y depende del uso que se le de al equipo. (Los computadores De escritorio NO tienen batería) ",
+Precio:"206",
+UnidadMedida:"tablet",
+ProveedorID:5,
+LicenciaCertificacionID:8
+    },
+    {
+      ProductoID:1,
+Nombre:"perro",
+Descripcion:"En Los computadores PORTATILES La duración de la batería es un valor aproximado y depende del uso que se le de al equipo. (Los computadores De escritorio NO tienen batería) ",
+Precio:"206",
+UnidadMedida:"tablet",
+ProveedorID:5,
+LicenciaCertificacionID:8
+    },
+    {
+      ProductoID:1,
+Nombre:"perro",
+Descripcion:"En Los computadores PORTATILES La duración de la batería es un valor aproximado y depende del uso que se le de al equipo. (Los computadores De escritorio NO tienen batería) ",
+Precio:"206",
+UnidadMedida:"tablet",
+ProveedorID:5,
+LicenciaCertificacionID:8
+    }
+  ]
+    return (
+      <>
       <Header />
-      <SeccionProducto lista={productos as Producto[]} />
-    </>
-  );
-}
+
+        <SeccionProducto lista={lista}/>
+          
+      </>
+    )
+  }
