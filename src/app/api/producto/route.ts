@@ -61,7 +61,6 @@ export async function PUT(request: NextRequest) {
     try {
         await connection;
 
-        // Extrayendo el ID del producto del parámetro de consulta
         const url = new URL(request.url);
         const productId = url.searchParams.get('product');
 
@@ -74,14 +73,12 @@ export async function PUT(request: NextRequest) {
         const body = await request.json();
         const { nombre, descripcion, precio, unidadmedida, proveedorid, licenciacertificacionid } = body;
 
-        // Verificar que todos los campos necesarios estén presentes
         if (!nombre || !descripcion || !precio || !unidadmedida || !proveedorid || !licenciacertificacionid) {
             return NextResponse.json({
                 message: "Todos los campos son requeridos para actualizar el producto.",
             }, { status: 400 });
         }
 
-        // Actualizar el producto en la base de datos
         await connection.query('UPDATE productos SET nombre = ?, descripcion = ?, precio = ?, unidadmedida = ?, proveedorid = ?, licenciacertificacionid = ? WHERE productoid = ?', [nombre, descripcion, precio, unidadmedida, proveedorid, licenciacertificacionid, productId]);
 
         const response = NextResponse.json({
@@ -91,6 +88,33 @@ export async function PUT(request: NextRequest) {
     } catch (err) {
         return NextResponse.json({
             message: "Ha ocurrido un error al intentar actualizar el producto.", err
+        }, { status: 500 });
+    }
+}
+
+export async function DELETE(request: NextRequest) {
+    try {
+        await connection;
+
+        const url = new URL(request.url);
+        const productId = url.searchParams.get('product');
+
+        if (!productId) {
+            return NextResponse.json({
+                message: "El ID del producto es requerido para eliminar.",
+            }, { status: 400 });
+        }
+
+        await connection.query('DELETE FROM productos WHERE productoid = ?', [productId]);
+
+        const response = NextResponse.json({
+            message: "Producto eliminado correctamente."
+        });
+        return response;
+    } catch (err) {
+        return NextResponse.json({
+            message: "Ha ocurrido un error al intentar eliminar el producto.",
+            error: err
         }, { status: 500 });
     }
 }
