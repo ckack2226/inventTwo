@@ -24,23 +24,23 @@ export default function Edit() {
     });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
-
+  
     try {
-      
-      const response = await axios.post(`/api/producto?product=${id}`, formData);
-
+      const response = await axios.put(`/api/producto?product=${id}`, formData); // Cambio a axios.put
+  
       if (response.status === 200) {
-        console.log('Producto creado con éxito');
+        console.log('Producto actualizado con éxito'); // Mensaje actualizado
       } else {
-        console.error('Error al crear el producto:', response.statusText);
+        console.error('Error al actualizar el producto:', response.statusText);
       }
     } catch (error) {
       console.error('Error de red:', error);
-
     }
   };
+  
+
     return (
         <>
             <Header />
