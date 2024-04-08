@@ -1,6 +1,6 @@
 'use client'
 
-import { Form } from '../components/Forms'
+import { Form } from "./Forms"
 import { useAuthFetch } from '@/app/hook/useAuthFetch'
 import { useLoading } from '@/app/hook/useLoading'
 
@@ -12,7 +12,7 @@ export default function LoginPage () {
     startLoading()
     await authFetch({
       endpoint: 'register',
-      redirectRoute: '/',
+      redirectRoute: '/login',
       formData
     })
     finishLoading()

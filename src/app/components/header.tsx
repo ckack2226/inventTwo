@@ -6,7 +6,7 @@ import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon, BellAlertIcon, UserIcon } fr
 
 
 const navigation = [
-  { name: 'Inicio', href: '#' },
+  { name: 'Crear Producto', href: '/crearProducto' },
   { name: 'Nosotros', href: '#AboutPrisma' },
   { name: 'Soporte', href: '#AboutUs' },
 ];
