@@ -3,8 +3,11 @@
 import axios from "axios";
 import Header from "../components/header"
 import React, {useState } from 'react';
+import { useSearchParams } from "next/navigation";
 
 export default function Edit() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get('product')
   const [formData, setFormData] = useState({
     Nombre: '',
     Precio: '',
@@ -26,7 +29,7 @@ export default function Edit() {
 
     try {
       
-      const response = await axios.post('/api/producto', formData);
+      const response = await axios.post(`/api/producto?product=${id}`, formData);
 
       if (response.status === 200) {
         console.log('Producto creado con éxito');
@@ -41,6 +44,9 @@ export default function Edit() {
     return (
         <>
             <Header />
+            <div>
+            {searchParams.get('product')}
+            </div>
 <form className="w-full max-w-lg" onSubmit={handleSubmit}>
   <div className="flex flex-wrap -mx-3 mb-6">
     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">

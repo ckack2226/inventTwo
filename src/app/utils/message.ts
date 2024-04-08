@@ -11,6 +11,7 @@ export const messages = {
     success:{
       userCreated: "Usuario creado correctamente",
       productCreated: "producto creado correctamente",
+      productUpdated: "producto editado correctamente",
       userLogged: 'Bienvenido a Invent2'
          },
  };
