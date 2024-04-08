@@ -10,6 +10,7 @@ export const messages = {
     },
     success:{
       userCreated: "Usuario creado correctamente",
+      productCreated: "producto creado correctamente",
       userLogged: 'Bienvenido a Invent2'
          },
  };

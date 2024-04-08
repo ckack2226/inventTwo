@@ -39,7 +39,7 @@ export const findAllProductos = (): Promise<Producto[]> => {
           result.Precio,
           result.UnidadMedida,
           result.ProveedorID,
-          result.LicenciaCertificadoID
+          result.LicenciaCertificacionID
         );
       });
       resolve(productos);
